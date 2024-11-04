@@ -1,0 +1,7 @@
+{
+  "name": "ParkDuocUC",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
