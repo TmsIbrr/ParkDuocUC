@@ -1,0 +1,31 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="ticket-container">
+    <img src="./assets/imagenes/ticket-icon.png" alt="Ticket Icon" class="ticket-icon" />
+
+    <form (submit)="crearTicket()">
+      <ion-item lines="none">
+        <ion-label class="texto" position="stacked">Nombre.</ion-label>
+        <ion-input type="text" placeholder="Ingresa tu nombre"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label class="texto" position="stacked">Apellidos.</ion-label>
+        <ion-input type="text" placeholder="Ingresa tus apellidos"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label class="texto" position="stacked">Hora De Reserva.</ion-label>
+        <ion-input type="time"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label class="texto" position="stacked">Motivos.</ion-label>
+        <ion-textarea placeholder="Escribe el motivo..."></ion-textarea>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" color="light" class="create-ticket-button">
+        Crear Ticket.
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

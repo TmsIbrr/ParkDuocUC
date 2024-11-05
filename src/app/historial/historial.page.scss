@@ -1,0 +1,35 @@
+.background-dark {
+    --ion-background-color: #333; /* Fondo oscuro */
+    color: #ffc; /* Color de texto claro */
+  
+    ion-toolbar {
+      background-color: #333; /* Fondo del toolbar */
+    }
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #ffc; /* Color del título */
+  }
+  
+  .date-section {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #ffc;
+    margin: 10px 0;
+  }
+  
+  .item-style {
+    color: #ffc; /* Color del texto */
+  }
+  
+  ion-avatar img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  ion-icon {
+    color: #ffc; /* Color de los iconos */
+  }
+  

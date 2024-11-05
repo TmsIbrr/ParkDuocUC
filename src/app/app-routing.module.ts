@@ -11,6 +11,15 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+
+  {
+    path: 'crearticket',
+    loadChildren: () => import('./crearticket/crearticket.module').then( m => m.CrearticketPageModule)
+  },
+  {
+    path: 'historial',
+    loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule)
+  },
 ];
 
 @NgModule({
