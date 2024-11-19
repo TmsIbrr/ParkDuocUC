@@ -1,20 +1,25 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="home-container">
+    <!-- Logo -->
+    <img src="./assets/imagenes/logoParkDuoc.png" alt="ParkDuocUC" class="logo" />
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <!-- Bienvenida -->
+    <div class="welcome-text">
+      <h1>Bienvenido a ParkDuocUC</h1>
+      <p>Gestiona y monitorea tus espacios de estacionamiento con facilidad.</p>
+    </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <!-- Opciones principales -->
+    <div class="options">
+      <ion-button expand="block" routerLink="/parking" class="option-button">
+        Ver disponibilidad de estacionamiento
+      </ion-button>
+      <ion-button expand="block" routerLink="/crearticket" class="option-button">
+        Reservar un espacio
+      </ion-button>
+      <ion-button expand="block" routerLink="/historial" class="option-button">
+        Historial
+      </ion-button>
+    </div>
   </div>
 </ion-content>

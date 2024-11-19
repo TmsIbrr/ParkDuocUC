@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <!-- Flecha de regreso -->
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">
+        <ion-icon name="refresh-outline" slot="icon-only" class="custom-back-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="perfil-page">
+  <div class="perfil-container">
+    <!-- Imagen del ícono del perfil -->
+    <img src="assets/imagenes/img-perfil.png" alt="Usuario" class="perfil-image" />
+
+    <!-- Formulario de perfil -->
+    <form (ngSubmit)="guardarPerfil()" #profileForm="ngForm">
+      <ion-label class="texto" position="stacked">Nombre</ion-label>
+      <ion-item lines="none" class="custom-item">
+        <ion-input
+          type="text"
+          [(ngModel)]="nombre"
+          name="nombre"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-label class="texto" position="stacked">Correo</ion-label>
+      <ion-item lines="none" class="custom-item">
+        <ion-input
+          type="email"
+          [(ngModel)]="correo"
+          name="correo"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <ion-label class="texto" position="stacked">Historial de reservas</ion-label>
+      <ion-item lines="none" class="custom-item">
+        <ion-textarea
+          [(ngModel)]="historialReservas"
+          name="historialReservas"
+          readonly
+        ></ion-textarea>
+      </ion-item>
+    </form>
+  </div>
+</ion-content>

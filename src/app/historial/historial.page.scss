@@ -32,4 +32,10 @@
   ion-icon {
     color: #ffc; /* Color de los iconos */
   }
+
+  .custom-back-icon {
+    transform: scaleX(-1); 
+    font-size: 24px; 
+    color: #ffc; 
+  }
   

@@ -1,0 +1,49 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="parking-container">
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">
+        <ion-icon name="refresh-outline" slot="icon-only" class="custom-back-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <!-- Leyenda -->
+    <div class="legend">
+      <div class="legend-item">
+        <div class="circle available"></div>
+        <span>Desocupado</span>
+      </div>
+      <div class="legend-item">
+        <div class="circle occupied"></div>
+        <span>Ocupado</span>
+      </div>
+      <div class="legend-item">
+        <div class="circle reserved"></div>
+        <span>Reservado</span>
+      </div>
+    </div>
+
+    <!-- Mapa de estacionamiento -->
+    <div class="parking-lot">
+      <!-- Fila superior -->
+      <div class="row">
+        <div class="espacio superior disponible"></div>
+        <div class="espacio superior ocupado"></div>
+        <div class="espacio superior reservado"></div>
+        <div class="espacio superior disponible"></div>
+        <div class="espacio superior ocupado"></div>
+      </div>
+
+      <!-- Corredor central -->
+      <div class="center-area"></div>
+
+      <!-- Fila inferior -->
+      <div class="row">
+        <div class="espacio inferior reservado"></div>
+        <div class="espacio inferior ocupado"></div>
+        <div class="espacio inferior disponible"></div>
+        <div class="espacio inferior ocupado"></div>
+        <div class="espacio inferior reservado"></div>
+      </div>
+    </div>
+  </div>
+</ion-content>
