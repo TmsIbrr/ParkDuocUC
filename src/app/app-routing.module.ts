@@ -14,8 +14,8 @@ const routes: Routes = [
 
   {
     path: 'crearticket',
-    loadChildren: () => import('./crearticket/crearticket.module').then( m => m.CrearticketPageModule)
-  },
+    loadChildren: () => import('./crearticket/crearticket.module').then(m => m.CrearticketPageModule)
+  },  
   {
     path: 'historial',
     loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule)

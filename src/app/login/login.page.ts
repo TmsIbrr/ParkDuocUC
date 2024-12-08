@@ -8,6 +8,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
+  idUsuario: string = "1";
   email: string = '';
   password: string = '';
 

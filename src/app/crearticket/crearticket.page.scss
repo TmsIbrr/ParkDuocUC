@@ -38,4 +38,16 @@
     color: black;
     font-weight: bold;
   }
+
+
+  .custom-back-icon {
+    transform: scaleX(-1); 
+    font-size: 24px; 
+    color: #ffc; 
+  }
+  
+  ion-icon {
+    color: #ffc; /* Color de los iconos */
+  }
+
   

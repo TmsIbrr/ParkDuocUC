@@ -45,3 +45,23 @@
     color: #ffeb3b; 
   }
   
+  .options {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .option-button {
+    --background: #fffed9; /* Fondo verde claro */
+    --color: black; /* Texto negro */
+    font-weight: bold;
+    font-size: 1.1em;
+    border-radius: 10px;
+  }
+
+  ion-item {
+    margin-top: 4px;
+    height: 40px;
+  }

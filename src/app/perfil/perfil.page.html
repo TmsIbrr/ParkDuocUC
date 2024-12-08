@@ -15,35 +15,19 @@
     <img src="assets/imagenes/img-perfil.png" alt="Usuario" class="perfil-image" />
 
     <!-- Formulario de perfil -->
-    <form (ngSubmit)="guardarPerfil()" #profileForm="ngForm">
       <ion-label class="texto" position="stacked">Nombre</ion-label>
-      <ion-item lines="none" class="custom-item">
-        <ion-input
-          type="text"
-          [(ngModel)]="nombre"
-          name="nombre"
-          required
-        ></ion-input>
+      <ion-item  *ngIf="usuario" lines="none" class="custom-item">
+        <p>{{ usuario.nombre }}</p>
       </ion-item>
 
-      <ion-label class="texto" position="stacked">Correo</ion-label>
-      <ion-item lines="none" class="custom-item">
-        <ion-input
-          type="email"
-          [(ngModel)]="correo"
-          name="correo"
-          required
-        ></ion-input>
+      <ion-label  *ngIf="usuario" class="texto" position="stacked">Correo</ion-label>
+      <ion-item  *ngIf="usuario" lines="none" class="custom-item">
+        <p>{{ usuario.correo }}</p>
       </ion-item>
 
       <ion-label class="texto" position="stacked">Historial de reservas</ion-label>
-      <ion-item lines="none" class="custom-item">
-        <ion-textarea
-          [(ngModel)]="historialReservas"
-          name="historialReservas"
-          readonly
-        ></ion-textarea>
-      </ion-item>
-    </form>
+        <ion-button expand="block" routerLink="/historial" class="option-button">
+          Historial
+        </ion-button>
   </div>
 </ion-content>

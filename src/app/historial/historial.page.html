@@ -7,7 +7,7 @@
       <ion-button>
         <ion-icon name="search-outline" slot="icon-only"></ion-icon>
       </ion-button>
-      <ion-button routerLink="/home">
+      <ion-button routerLink="/perfil">
         <ion-icon name="refresh-outline" slot="icon-only" class="custom-back-icon"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -16,18 +16,18 @@
 
 <ion-content class="background-dark">
   <div class="date-section">
-    Hoy - 17 sept 2024
+    Hoy - {{ fechaActual | date: 'dd MMM yyyy ' }}
   </div>
 
   <ion-list lines="none">
-    <ion-item *ngFor="let item of historial" class="item-style">
+    <ion-item *ngFor="let item of reservas" class="item-style">
       <ion-avatar slot="start">
         <img src="assets/imagenes/icono.png" />
       </ion-avatar>
       <ion-label>
         <h2>Reserva</h2>
-        <p>HORA DE LLEGADA: {{ item.horaLlegada }}</p>
-        <p>HORA DE SALIDA: {{ item.horaSalida }}</p>
+        <p>HORA DE LLEGADA: {{ item.hora_llegada | date: 'dd/MM/yyyy HH:mm' }}</p>
+        <p>HORA DE SALIDA: {{ item.hora_salida |date: 'dd/MM/yyyy HH:mm' }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
