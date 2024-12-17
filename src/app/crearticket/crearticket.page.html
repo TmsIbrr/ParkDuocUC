@@ -1,43 +1,54 @@
-  <ion-buttons slot="end">
-    <ion-button routerLink="/home">
-      <ion-icon name="refresh-outline" slot="icon-only" class="custom-back-icon"></ion-icon>
-    </ion-button>
-  </ion-buttons>
+<ion-buttons slot="end">
+  <ion-button routerLink="/home">
+    <ion-icon name="refresh-outline" slot="icon-only" class="custom-back-icon"></ion-icon>
+  </ion-button>
+</ion-buttons>
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <div class="ticket-container">
     <img src="./assets/imagenes/ticket-icon.png" alt="Ticket Icon" class="ticket-icon" />
 
-    
+    <!-- Formulario -->
+    <form (ngSubmit)="crearTicket()">
       <ion-item lines="none">
-        <ion-label class="texto" position="stacked">Nombre.</ion-label>
-        <ion-input [(ngModel)]=" nom_cli"></ion-input>
+        <ion-label class="texto" position="stacked">Nombre</ion-label>
+        <ion-input [(ngModel)]="nom_cli" name="nom_cli" required></ion-input>
       </ion-item>
 
       <ion-item lines="none">
-        <ion-label class="texto" position="stacked">Apellidos.</ion-label>
-        <ion-input [(ngModel)]="apellidos"></ion-input>
+        <ion-label class="texto" position="stacked">Apellidos</ion-label>
+        <ion-input [(ngModel)]="apellidos" name="apellidos" required></ion-input>
       </ion-item>
 
       <ion-item lines="none">
-        <ion-label class="texto" position="stacked">Hora De Reserva.</ion-label>
-        <ion-input [(ngModel)]="hora_llegada" type="datetime-local"></ion-input>
+        <ion-label class="texto" position="stacked">Hora De Reserva</ion-label>
+        <ion-input [(ngModel)]="hora_llegada" name="hora_llegada" type="datetime-local" required></ion-input>
       </ion-item>
 
       <ion-item lines="none">
-        <ion-label class="texto" position="stacked">Hora De Salida.</ion-label>
-        <ion-input [(ngModel)]="hora_salida" type="datetime-local"></ion-input>
+        <ion-label class="texto" position="stacked">Hora De Salida</ion-label>
+        <ion-input [(ngModel)]="hora_salida" name="hora_salida" type="datetime-local" required></ion-input>
       </ion-item>
 
       <ion-item lines="none">
-        <ion-label class="texto" position="stacked">Motivos.</ion-label>
-        <ion-textarea [(ngModel)]="motivos" placeholder="Escribe el motivo..."></ion-textarea>
+        <ion-label class="texto" position="stacked">Motivos</ion-label>
+        <ion-textarea [(ngModel)]="motivos" name="motivos" placeholder="Escribe el motivo..." required></ion-textarea>
       </ion-item>
 
-      <ion-button expand="block" type="submit" color="light" class="create-ticket-button"
-      (click)="crearTicket()">
-        Crear Ticket.
+      <!-- Selector de Espacio de Estacionamiento -->
+      <ion-item>
+        <ion-label class="texto">Espacio de Estacionamiento</ion-label>
+        <ion-select [(ngModel)]="idEspacio" name="idEspacio" interface="popover" required>
+          <ion-select-option *ngFor="let espacio of espaciosDisponibles" [value]="espacio.id">
+            Espacio {{ espacio.id }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Botón de Crear Ticket -->
+      <ion-button expand="block" type="submit" color="primary" class="create-ticket-button">
+        Crear Ticket
       </ion-button>
-    
+    </form>
   </div>
 </ion-content>

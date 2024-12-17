@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   private email: string = '';
-  private rol: string = ''; // Nuevo: Guardar el rol del usuario
+  private rol: string = ''; // Guardar el rol del usuario
   private user = new BehaviorSubject<any>(null);  
 
 

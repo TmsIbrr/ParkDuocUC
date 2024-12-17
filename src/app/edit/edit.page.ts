@@ -15,6 +15,7 @@ export class EditPage implements OnInit {
     nom_cli: '',
     apellidos: '',
     idUsuario: '',
+    idEspacio: '',
     hora_llegada: new Date(),
     hora_salida: new Date(),
     motivos: '',
@@ -41,7 +42,7 @@ export class EditPage implements OnInit {
         (reservaData: Reserva | undefined) => {
           if (reservaData) {
             this.reserva = reservaData;
-            // Si las fechas son instancias de Date, conviértelas para 'ion-datetime'
+
             this.reserva.hora_llegada = reservaData.hora_llegada instanceof Date
               ? reservaData.hora_llegada.toISOString()
               : reservaData.hora_llegada;
@@ -62,7 +63,6 @@ export class EditPage implements OnInit {
 async updateReserva() {
   if (this.id) {
     try {
-      // Llamamos al servicio con el ID y los datos a actualizar
       await this.reservaService.actualizarReserva(this.id, {
         nom_cli: this.reserva.nom_cli,
         apellidos: this.reserva.apellidos,
@@ -71,7 +71,7 @@ async updateReserva() {
         motivos: this.reserva.motivos,
       });
       console.log('Reserva actualizada correctamente');
-      this.router.navigate(['/home']); // Redirigir a la página principal
+      this.router.navigate(['/home']); 
     } catch (error) {
       console.error('Error actualizando reserva:', error);
     }

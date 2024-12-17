@@ -6,6 +6,9 @@ import { filter } from 'rxjs';
 import { collection, addDoc, doc, updateDoc, deleteDoc, getDocs, getDoc, onSnapshot } from 'firebase/firestore';
 import { map } from 'rxjs/operators';
 import { Timestamp } from '@angular/fire/firestore';
+import { EspacioService, Espacio } from './espacio.service';
+import { first } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +17,7 @@ export class ReservaService {
   private collectionName = 'reserva'
   reservas: Reserva[] = [];
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore, private espacioService: EspacioService) {}
 
   async reservaExiste(id: string): Promise<boolean> {
     const docRef = this.firestore.doc(`reserva/${id}`);
@@ -31,8 +34,20 @@ export class ReservaService {
   }
 
   // Agregar reserva
-  agregarReserva(reserva: Reserva) {
-    return this.firestore.collection('reserva').add(reserva);
+  async agregarReserva(reserva: Reserva): Promise<void> {
+    // Obtener espacios disponibles
+    const espaciosDisponibles = await this.espacioService.getEspaciosDisponibles().pipe(first()).toPromise();
+    
+    if (espaciosDisponibles && espaciosDisponibles.length > 0) {
+      const espacioAsignado: Espacio = espaciosDisponibles[0];
+      await this.espacioService.actualizarEstado(espacioAsignado.id, 'reservado');
+    } else {
+      console.error('No hay espacios disponibles para asignar.');
+    }
+    
+
+    // Agregar la reserva a Firestore
+    return this.firestore.collection<Reserva>('reserva').doc(reserva.id).set(reserva);
   }
 
   // Actualizar reserva

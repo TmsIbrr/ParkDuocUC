@@ -25,9 +25,10 @@
         <img src="assets/imagenes/icono.png" />
       </ion-avatar>
       <ion-label>
-        <h2>Reserva</h2>
-        <p>HORA DE LLEGADA: {{ item.hora_llegada | date: 'dd/MM/yyyy HH:mm' }}</p>
-        <p>HORA DE SALIDA: {{ item.hora_salida |date: 'dd/MM/yyyy HH:mm' }}</p>
+        <h2><strong>Reserva</strong></h2>
+        <p><strong>Espacio reservado:</strong> {{ item.idEspacio }}</p>
+        <p><strong>HORA DE LLEGADA:</strong> {{ item.hora_llegada | date: 'dd/MM/yyyy HH:mm' }}</p>
+        <p><strong>HORA DE SALIDA:</strong> {{ item.hora_salida |date: 'dd/MM/yyyy HH:mm' }}</p>
       </ion-label>
     </ion-item>
   </ion-list>

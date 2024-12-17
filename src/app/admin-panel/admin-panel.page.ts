@@ -3,7 +3,8 @@ import { Reserva } from '../models/reserva.model';
 import { ReservaService } from '../services/reserva.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { EspacioService } from '../services/espacio.service'; // Asegúrate de importar el servicio de Espacios
+import { AngularFirestore } from '@angular/fire/compat/firestore'; // Importa AngularFirestore
 
 @Component({
   selector: 'app-admin-panel',
@@ -14,9 +15,12 @@ export class AdminPanelPage implements OnInit {
   reservas: any[] = [];
   reservasSubscription: Subscription | undefined;
 
-  constructor(private reservaService: ReservaService, 
-              private router: Router,
-            private firestore: AngularFirestore) { }
+  constructor(
+    private reservaService: ReservaService,
+    private router: Router,
+    private espacioService: EspacioService,  // Inyecta el servicio de Espacios
+    private firestore: AngularFirestore // Inyecta AngularFirestore aquí
+  ) {}
 
   ngOnInit() {
     this.reservaService.getReservasObservable().subscribe(
@@ -35,15 +39,14 @@ export class AdminPanelPage implements OnInit {
       console.error('El ID proporcionado no es válido');
       return false;
     }
-  
+
     try {
       // Acceder al documento usando el ID de Firebase
       const docRef = this.firestore.doc(`reserva/${id}`);
       const snapshot = await docRef.get().toPromise();
-  
-      // Verificar si el snapshot está definido y si el documento existe
+
       if (snapshot && snapshot.exists) {
-        console.log('Reserva encontrada:', snapshot.data()); // Muestra los datos del documento
+        console.log('Reserva encontrada:', snapshot.data());
         return true;
       } else {
         console.log(`No se encontró reserva con el ID: ${id}`);
@@ -54,32 +57,32 @@ export class AdminPanelPage implements OnInit {
       return false;
     }
   }
-  
-  
-  
-  
-  
-  
 
   async updateReserva(reserva: any) {
-  const reservaId = reserva.id;  // Esto debe ser el id que Firebase asigna al documento
-  
-  const existe = await this.reservaExiste(reservaId);
-  if (existe) {
-    this.router.navigate(['/edit', reservaId]);  // Navegar a la página de edición con el id correcto
-  } else {
-    console.log("Error: la reserva no existe.");
+    const reservaId = reserva.id;  // Obtener el id de la reserva
+    const existe = await this.reservaExiste(reservaId);
+    if (existe) {
+      this.router.navigate(['/edit', reservaId]);
+    } else {
+      console.log("Error: la reserva no existe.");
+    }
   }
-}
-
-  
 
   async deleteReserva(reservaId: string) {
-    console.log('ID de la reserva a eliminar:', reservaId);  // Verifica si el ID es correcto
+    console.log('ID de la reserva a eliminar:', reservaId);
+
+    // Obtener el id del espacio de la reserva eliminada
+    const reserva = this.reservas.find(r => r.id === reservaId);
+    if (reserva && reserva.idEspacio) {
+      // Cambiar el estado del espacio a "disponible" al eliminar la reserva
+      await this.espacioService.actualizarEstado(reserva.idEspacio, 'disponible');
+      console.log('Estado del espacio actualizado a disponible');
+    }
+
+    // Eliminar la reserva
     await this.reservaService.deleteReserva(reservaId);
     this.loadReservasInRealTime(); 
   }
-
 
   loadReservasInRealTime() {
     this.reservasSubscription = this.reservaService.getReservasObservable().subscribe(
@@ -92,4 +95,4 @@ export class AdminPanelPage implements OnInit {
       }
     );
   }
-}   
+}

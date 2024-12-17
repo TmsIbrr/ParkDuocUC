@@ -4,6 +4,9 @@
       <ion-button routerLink="/home">
         <ion-icon name="refresh-outline" slot="icon-only" class="custom-back-icon"></ion-icon>
       </ion-button>
+      <ion-button (click)="refrescar()">
+        Actualizar
+      </ion-button>
     </ion-buttons>
 
     <!-- Leyenda -->
@@ -26,11 +29,13 @@
     <div class="parking-lot">
       <!-- Fila superior -->
       <div class="row">
-        <div class="espacio superior disponible"></div>
-        <div class="espacio superior ocupado"></div>
-        <div class="espacio superior reservado"></div>
-        <div class="espacio superior disponible"></div>
-        <div class="espacio superior ocupado"></div>
+        <div
+          *ngFor="let espacio of espacios.slice(0, 5)"
+          class="espacio"
+          [ngClass]="espacio.estado"
+        >
+          {{ espacio.id }}
+        </div>
       </div>
 
       <!-- Corredor central -->
@@ -38,12 +43,27 @@
 
       <!-- Fila inferior -->
       <div class="row">
-        <div class="espacio inferior reservado"></div>
-        <div class="espacio inferior ocupado"></div>
-        <div class="espacio inferior disponible"></div>
-        <div class="espacio inferior ocupado"></div>
-        <div class="espacio inferior reservado"></div>
+        <div
+          *ngFor="let espacio of espacios.slice(5, 10)"
+          class="espacio"
+          [ngClass]="espacio.estado"
+        >
+          {{ espacio.id }}
+        </div>
       </div>
-    </div>
+
+      <div class="center-area"></div>
+    
+      <div class="row">
+        <div
+          *ngFor="let espacio of espacios.slice(11, 20)"
+          class="espacio"
+          [ngClass]="espacio.estado"
+        >
+          {{ espacio.id }}
+        </div>
+      </div>
+
+    </div> 
   </div>
 </ion-content>
