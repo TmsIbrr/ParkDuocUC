@@ -14,6 +14,8 @@ import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 
+import { AngularFireAuthModule } from '@angular/fire/compat/auth'; 
+
 registerLocaleData(localeEs, 'es');
 
 @NgModule({
@@ -23,7 +25,8 @@ registerLocaleData(localeEs, 'es');
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase), // Inicializar Firebase
-    AngularFirestoreModule // Importar Firestore
+    AngularFirestoreModule, // Importar Firestore
+    AngularFireAuthModule // Importar módulo de autenticación
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
               { provide: LOCALE_ID, useValue: 'es' }],

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ReservaService } from '../services/reserva.service';
 import { Reserva } from '../models/reserva.model';
 import { NavController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service'; // Importar el AuthService
 
 @Component({
   selector: 'app-crearticket',
@@ -11,46 +12,44 @@ import { NavController } from '@ionic/angular';
 export class CrearticketPage {
 
   id: string = "";
-  idUsuario: string = "";
+  idUsuario: string = ""; // Aquí se almacenará el UID del usuario autenticado
   nom_cli: string = "";
   apellidos: string = "";
   hora_llegada: string = "";
   hora_salida: string = "";
   motivos: string = "";
 
-  reserva: Reserva = {
-    id: "",
-    idUsuario: "1",
-    nom_cli: "",
-    apellidos: "",
-    hora_llegada: new Date(),
-    hora_salida: new Date(),
-    motivos: ""
-  }
-  
+  constructor(
+    private reservaService: ReservaService,
+    private navCtrl: NavController,
+    private authService: AuthService // Inyectar AuthService
+  ) {}
 
-
-  constructor(private reservaService: ReservaService, private navCtrl: NavController) { }
-
-
-  crearTicket(){
+  async crearTicket() {
     if (this.nom_cli && this.apellidos && this.hora_llegada && this.hora_salida) {
       const llegadaDate = new Date(this.hora_llegada);
-      const salidaDate = new Date(this.hora_salida); // Convertir fecha de salida a formato Date
+      const salidaDate = new Date(this.hora_salida);
+
+      // Obtener el ID del usuario autenticado
+      const userId = await this.authService.getUserId();
+      if (!userId) {
+        console.error('No se pudo obtener el ID del usuario autenticado');
+        return;
+      }
+
       const nuevaReserva: Reserva = {
-        id: this.generateUniqueId(), // Generar un ID único para el viaje
-        idUsuario: this.idUsuario,
+        id: this.generateUniqueId(),
+        idUsuario: userId, // Asignar el ID del usuario autenticado
         nom_cli: this.nom_cli,
         apellidos: this.apellidos,
         hora_llegada: llegadaDate,
         hora_salida: salidaDate,
         motivos: this.motivos,
       };
-  
-      // Llamar al servicio para agregar el viaje a la base de datos
+
       this.reservaService.agregarReserva(nuevaReserva).then(() => {
         console.log('Reserva agregada con éxito');
-        this.navCtrl.navigateBack('/home'); // Redirigir a la página de inicio
+        this.navCtrl.navigateBack('/home');
       }).catch((error: any) => {  
         console.error('Error al agregar reserva', error);
       });
@@ -62,5 +61,4 @@ export class CrearticketPage {
   generateUniqueId(): string {
     return (Math.random() + 1).toString(36).substring(7);  
   }
-
 }

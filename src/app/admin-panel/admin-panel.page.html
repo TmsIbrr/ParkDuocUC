@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title class="title">
+      admin panel.
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/home">
+        <ion-icon name="refresh-outline" slot="icon-only" class="custom-back-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background-dark" [fullscreen]="true">
+  <ion-list lines="none">
+    <ion-item *ngFor="let item of reservas" class="item-style">
+      <ion-avatar slot="start">
+        <img src="assets/imagenes/icono.png" />
+      </ion-avatar>
+      <ion-label>
+        <h2>Reserva de: {{ item.nom_cli }} {{ item.apellidos }}</h2>
+        <p>HORA DE LLEGADA: {{ item.hora_llegada | date: 'dd/MM/yyyy HH:mm' }}</p>
+        <p>HORA DE SALIDA: {{ item.hora_salida |date: 'dd/MM/yyyy HH:mm' }}</p>
+        <p>Motivos: {{ item.motivos }}</p>
+      </ion-label>
+
+      <ion-buttons slot="end">
+        <ion-button color="primary" (click)="updateReserva(item)">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="deleteReserva(item.id)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>

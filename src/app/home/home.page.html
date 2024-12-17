@@ -16,9 +16,18 @@
       <ion-button expand="block" routerLink="/crearticket" class="option-button">
         Reservar un espacio
       </ion-button>
-      <ion-button expand="block" routerLink="/perfil" class="option-button">
+
+      <ion-button *ngIf="!isAdmin" expand="block" routerLink="/perfil" class="option-button">
         Perfil
       </ion-button>
+      <ion-button *ngIf="isAdmin" expand="block" routerLink="/admin-panel" class="option-button">
+        Panel de Administración
+      </ion-button>
+
+      <ion-button expand="block" color="danger" (click)="logout()" class="option-button">
+        Cerrar sesión
+      </ion-button>
+      
     </div>
   </div>
 </ion-content>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -32,6 +33,15 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   },
+  {
+    path: 'admin-panel',
+    loadChildren: () => import('./admin-panel/admin-panel.module').then((m) => m.AdminPanelPageModule),
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'edit/:id',
+    loadChildren: () => import('./edit/edit.module').then(m => m.EditPageModule)
+},
 ];
 
 @NgModule({

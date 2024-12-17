@@ -1,0 +1,46 @@
+
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title class="title">
+      Editar reserva.
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/home">
+        <ion-icon name="refresh-outline" slot="icon-only" class="custom-back-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background-dark">
+  <form (ngSubmit)="updateReserva()">
+    <ion-item>
+      <ion-label class="texto" position="floating">Nombre Cliente</ion-label>
+      <ion-input [(ngModel)]="reserva.nom_cli" name="nom_cli"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="texto" position="floating">Apellidos</ion-label>
+      <ion-input [(ngModel)]="reserva.apellidos" name="apellidos"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="texto" position="floating">Hora Llegada</ion-label>
+      <!-- Cambié a datetime-local para ser consistente con el formulario de creación -->
+      <ion-input [(ngModel)]="reserva.hora_llegada" name="hora_llegada" type="datetime-local"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="texto" position="floating">Hora Salida</ion-label>
+      <!-- Cambié a datetime-local para ser consistente con el formulario de creación -->
+      <ion-input [(ngModel)]="reserva.hora_salida" name="hora_salida" type="datetime-local"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="texto" position="floating">Motivos</ion-label>
+      <ion-input [(ngModel)]="reserva.motivos" name="motivos"></ion-input>
+    </ion-item>
+
+    <ion-button class="actualizar-button" expand="full" type="submit">Actualizar Reserva</ion-button>
+  </form>
+</ion-content>

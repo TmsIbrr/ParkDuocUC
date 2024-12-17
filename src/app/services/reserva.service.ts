@@ -11,47 +11,55 @@ import { Timestamp } from '@angular/fire/firestore';
   providedIn: 'root',
 })
 export class ReservaService {
+  private collectionName = 'reserva'
+  reservas: Reserva[] = [];
 
+  constructor(private firestore: AngularFirestore) {}
 
-  constructor(private angularFirestore: AngularFirestore) {}
+  async reservaExiste(id: string): Promise<boolean> {
+    const docRef = this.firestore.doc(`reserva/${id}`);
+    const snapshot = await docRef.get().toPromise();
+    return snapshot ? snapshot.exists : false
+  }
+
 
   // Obtener todas las reservas
   obtenerReservas(): Observable<Reserva[]> {
-    return this.angularFirestore
+    return this.firestore
       .collection<Reserva>('reserva')
       .valueChanges({ idField: 'id' });
   }
 
   // Agregar reserva
   agregarReserva(reserva: Reserva) {
-    return this.angularFirestore.collection('reserva').add(reserva);
+    return this.firestore.collection('reserva').add(reserva);
   }
 
   // Actualizar reserva
-  actualizarReserva(id: string, reserva: Partial<Reserva>) {
-    return this.angularFirestore.collection('reserva').doc(id).update(reserva);
+  actualizarReserva(id: string, data: Partial<Reserva>) {
+    const docRef = this.firestore.doc(`reserva/${id}`);
+    return docRef.update(data);  // Solo actualiza los campos necesarios
   }
+
 
   // Eliminar reserva
   deleteReserva(id: string) {
-    return this.angularFirestore.collection('reserva').doc(id).delete();
+    return this.firestore.collection('reserva').doc(id).delete();
   }
 
   // Obtener reserva por ID
   getReservaById(id: string): Observable<Reserva> {
-    return this.angularFirestore
-      .collection('reserva')
-      .doc<Reserva>(id)
-      .valueChanges()
-      .pipe(
-        filter((reserva): reserva is Reserva => reserva !== undefined) // Filtra undefined
-      );
+    return this.firestore
+      .collection<Reserva>('reserva')
+      .doc(id)
+      .valueChanges() as Observable<Reserva>;
   }
+  
 
 
 
 getReservasObservable(): Observable<Reserva[]> {
-  return this.angularFirestore
+  return this.firestore
     .collection<Reserva>('reserva')
     .valueChanges({ idField: 'id' })
     .pipe(
